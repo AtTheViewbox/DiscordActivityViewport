@@ -31,7 +31,8 @@ export default function Layout() {
     ));
 
     return renderingEngine ? (
-        <div className="grid-container" style={{ gridTemplateColumns: `repeat(${c}, 1fr)`, gridTemplateRows: `repeat(${r}, 1fr)` }}>{items}</div>
-    ) : <div>Include data to render</div>;
+        items? (<div className="grid-container" style={{ gridTemplateColumns: `repeat(${c}, 1fr)`, gridTemplateRows: `repeat(${r}, 1fr)` }}>{items}</div>):
+        <div>Include data to render</div>
+    ) : null;
 };
 
