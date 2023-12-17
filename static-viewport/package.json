@@ -1,7 +1,7 @@
 {
   "name": "static-viewport",
   "version": "0.1.0",
-  "homepage": "https://AtTheViewbox.github.io/TemplateStaticCornerstone3DViewport",
+  "homepage": "https://mfei1225.github.io/TemplateStaticCornerstone3DViewport",
   "private": true,
   "dependencies": {
     "@cornerstonejs/core": "^1.13.1",
