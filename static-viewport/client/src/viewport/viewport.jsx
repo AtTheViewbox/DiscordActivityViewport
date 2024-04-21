@@ -1,5 +1,5 @@
 import React, { useRef, useContext, useEffect } from 'react';
-import { DataContext } from '../context/DataContext.js';
+import { DataContext } from '../context/DataContext.jsx';
 
 import * as cornerstone from '@cornerstonejs/core';
 import * as cornerstoneTools from '@cornerstonejs/tools';

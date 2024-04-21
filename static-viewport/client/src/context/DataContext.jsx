@@ -11,20 +11,45 @@ import dicomParser from 'dicom-parser';
 export const DataContext = createContext({});    
 export const DataDispatchContext = createContext({});
 
+
+const default_data={
+    "m": "true",
+    "ld": {
+        "r": "1",
+        "c": "1"
+    },
+    "vd": [
+        {
+            "s": [
+                "dicomweb:https://s3.amazonaws.com/elasticbeanstalk-us-east-1-843279806438/dicom/production/bJiSsXVSfv_1.3.12.2.1107.5.1.4.64104.30000011091411531573400005893/001.dcm.gz",
+                "dicomweb:https://s3.amazonaws.com/elasticbeanstalk-us-east-1-843279806438/dicom/production/bJiSsXVSfv_1.3.12.2.1107.5.1.4.64104.30000011091411531573400005893/002.dcm.gz",
+            ],
+            "ww": "1400",
+            "wc": "1200",
+            "ci": "0",
+            "z": "1",
+            "px": "0",
+            "py": "0",
+            "r": "0"
+        }
+    ]
+}
+// "dicomweb:https://s3.amazonaws.com/elasticbeanstalk-us-east-1-843279806438/dicom/production/bJiSsXVSfv_1.3.12.2.1107.5.1.4.64104.30000011091411531573400005893/002.dcm.gz",],
 // create initial data object from URL query string
-const urlData = unflatten(Object.fromEntries(new URLSearchParams(window.location.search)));
+var urlData = unflatten(Object.fromEntries(new URLSearchParams(window.location.search)));
+if (urlData.vd){
 urlData.vd.forEach((vdItem) => {
     if (vdItem.s && vdItem.s.pf && vdItem.s.sf && vdItem.s.s && vdItem.s.e) {
         vdItem.s = recreateList(vdItem.s.pf, vdItem.s.sf, vdItem.s.s, vdItem.s.e);
     }
-});
+})}else{
+    urlData=default_data
+};
 
-console.log(urlData);
-
-console.log("urlData", urlData)
 
 export const DataProvider = ({ children }) => {
     const [data, dispatch] = useReducer(dataReducer, urlData);
+
 
     useEffect(() => {
         console.log("Data provider loaded!", data);
@@ -64,7 +89,7 @@ export const DataProvider = ({ children }) => {
     }, []);
 
     return (
-        <DataContext.Provider value={{ data }}>
+        <DataContext.Provider value={{data}}>
             <DataDispatchContext.Provider value={{ dispatch }}>
                 {children}
             </DataDispatchContext.Provider>

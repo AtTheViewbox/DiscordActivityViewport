@@ -1,4 +1,8 @@
+node_modules/
+package-lock.json
 .DS_Store
-static-viewport/node_modules/
 static-viewport/build/
+static-viewport/client/node_modules/
 static-viewport/.DS_Store
+.env
+

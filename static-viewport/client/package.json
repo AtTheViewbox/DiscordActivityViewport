@@ -21,10 +21,10 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "vite": "^5.2.10",
-    "vite-tsconfig-paths": "^4.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "dev": "vite",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
