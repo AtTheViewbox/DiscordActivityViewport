@@ -1,5 +1,5 @@
 # TemplateStaticCornerstone3DViewport
-Refer to [this](https://discord.com/developers/docs/activities/building-an-activity) for setup
+Refer to [Discord](https://discord.com/developers/docs/activities/building-an-activity) for setup
 
 Navigate to folder and install dependency
 ```
@@ -37,7 +37,7 @@ Navigate to [discord](https://discord.com/developers/applications) and URl Mappi
 
 Use 
 ```
-Prefix: /, tagert: the proxy link(i.e. korean-troy-bars-canon.trycloudflare.com)
+Prefix: /, Target: the proxy link(i.e. korean-troy-bars-canon.trycloudflare.com)
 Prefix: /amazon, Target: s3.amazonaws.com
 Prefix: /cornerstone, Target: unpkg.com
 ```
