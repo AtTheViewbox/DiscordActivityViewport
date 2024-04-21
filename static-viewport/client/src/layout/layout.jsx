@@ -1,7 +1,7 @@
 import './layout.css';
 import { useContext, useEffect } from 'react';
-import { DataContext, DataDispatchContext, dataReducer } from '../context/DataContext.js';
-import Viewport from '../viewport/viewport';
+import { DataContext, DataDispatchContext, dataReducer } from '../context/DataContext.jsx';
+import Viewport from '../viewport/viewport.jsx';
 
 export default function Layout() {
     const { ld, renderingEngine } = useContext(DataContext).data;
@@ -31,8 +31,7 @@ export default function Layout() {
     ));
 
     return renderingEngine ? (
-        items? (<div className="grid-container" style={{ gridTemplateColumns: `repeat(${c}, 1fr)`, gridTemplateRows: `repeat(${r}, 1fr)` }}>{items}</div>):
-        <div>Include data to render</div>
+        <div className="grid-container" style={{ gridTemplateColumns: `repeat(${c}, 1fr)`, gridTemplateRows: `repeat(${r}, 1fr)` }}>{items}</div>
     ) : null;
 };
 
