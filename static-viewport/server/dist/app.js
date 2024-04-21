@@ -32,8 +32,8 @@ app.post('/api/token', (req, res) => __awaiter(void 0, void 0, void 0, function*
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams({
-            client_id: "1229142077057663108",
-            client_secret: "-5g6k5h4vfASc4MCAgjkqMaJyOtaX8Zo",
+            client_id: process.env.VITE_CLIENT_ID,
+            client_secret: process.env.CLIENT_SECRET,
             grant_type: 'authorization_code',
             code: req.body.code,
         }),

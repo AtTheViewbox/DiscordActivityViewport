@@ -10,8 +10,8 @@ function App() {
   //const discordSdk = new DiscordSDK(process.env.VITE_DISCORD_CLIENT_ID);
   const discordSdk = new DiscordSDK(import.meta.env.VITE_DISCORD_CLIENT_ID);
 
-  patchUrlMappings([{prefix: '/c', target: 'unpkg.com'},
-  {prefix: '/a', target: "s3.amazonaws.com"},
+  patchUrlMappings([{prefix: '/cornerstone', target: 'unpkg.com'},
+  {prefix: '/amazon', target: "s3.amazonaws.com"},
 ]);
   const [username, setUsername] = useState("placeholder")
   const [avatarSrc, setAvatarSrc] = useState(`https://cdn.discordapp.com/embed/avatars/${1}.png`)
