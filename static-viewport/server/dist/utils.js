@@ -22,8 +22,8 @@ exports.sleep = sleep;
  * This function extends fetch to allow retrying
  * If the request returns a 429 error code, it will wait and retry after "retry_after" seconds
  */
-function fetchAndRetry(input_1, init_1) {
-    return __awaiter(this, arguments, void 0, function* (input, init, nRetries = 3) {
+function fetchAndRetry(input, init, nRetries = 3) {
+    return __awaiter(this, void 0, void 0, function* () {
         try {
             // Make the request
             const response = yield (0, cross_fetch_1.default)(input, init);

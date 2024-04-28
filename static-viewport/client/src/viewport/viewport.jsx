@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from 'react';
+import React, { useRef, useContext, useEffect,useState } from 'react';
 import { DataContext } from '../context/DataContext.jsx';
 
 import * as cornerstone from '@cornerstonejs/core';
@@ -12,7 +12,42 @@ export default function Viewport(props) {
   const { vd } = useContext(DataContext).data;
   const { viewport_idx, rendering_engine } = props;
   const viewport_data = vd[viewport_idx];
+  const [pan, setPan] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const changePan = () => {
+    setPan(!pan)
+  }
 
+  useEffect(() => {
+    const {
+      PanTool,
+      WindowLevelTool,
+      StackScrollTool,
+      StackScrollMouseWheelTool,
+      ZoomTool,
+      PlanarRotateTool,
+      ToolGroupManager,
+      Enums: csToolsEnums,
+    } = cornerstoneTools;
+    const { MouseBindings } = csToolsEnums;
+
+    const toolGroupId = `${viewport_idx}-tl`;
+    const toolGroup = ToolGroupManager.getToolGroup(toolGroupId);
+
+ 
+    if(pan){
+      toolGroup.setToolPassive(WindowLevelTool.toolName);
+      toolGroup.setToolActive(PanTool.toolName, { bindings: [{ mouseButton: MouseBindings.Primary }], });
+    }
+    else{
+      if (!isLoading){
+      //toolGroup.setToolPassive(WindowLevelTool.toolName);
+      toolGroup.setToolPassive(PanTool.toolName);
+     toolGroup.setToolActive(WindowLevelTool.toolName, { bindings: [{ mouseButton: MouseBindings.Primary }], });}
+    }
+
+
+  },[pan])
   useEffect(() => {
 
     const loadImagesAndDisplay = async () => {
@@ -50,7 +85,7 @@ export default function Viewport(props) {
       viewport.render();
     };
 
-    const addCornerstoneTools = () => {
+    const addCornerstoneTools = async () => {
 
       const userAgent = typeof window.navigator === 'undefined' ? '' : navigator.userAgent;
       const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
@@ -102,7 +137,10 @@ export default function Viewport(props) {
     console.log("mounting viewport");
     if (viewport_data) {
       loadImagesAndDisplay().then(() => {
-        addCornerstoneTools();
+        addCornerstoneTools().then(()=>{
+          setIsLoading(false)
+
+        });
       });
     }
     return () => { console.log("unmounting viewport"); };
@@ -111,6 +149,7 @@ export default function Viewport(props) {
 
   return (
     <>
+      <button onClick={changePan}> Pan: {pan.toString()}</button>
       <div ref={elementRef} id={viewport_idx} style={{ width: '100%', height: '100%' }} />
     </>
   );
